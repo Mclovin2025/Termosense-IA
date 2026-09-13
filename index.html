@@ -1,80 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDgcp8vUf-4D6oangMmeFZboxa98tUt5BM",
-    authDomain: "termosense-ia.firebaseapp.com",
-    databaseURL: "https://termosense-ia-default-rtdb.firebaseio.com",
-    projectId: "termosense-ia",
-    storageBucket: "termosense-ia.firebasestorage.app",
-    messagingSenderId: "412492814990",
-    appId: "1:412492814990:web:a5bd602b3b69f5ca6907df",
-    measurementId: "G-CWELCCML23"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Termosense IA LoT</title>
-  
+  <title>Temperatura en tiempo real</title>
   <link rel="stylesheet" href="style.css">
-  
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-  <header>
-    <h1>Termosense IA IoT</h1>
-    <p>Monitoreo en tiempo real y detección de incendios</p>
-  </header>
+  <main class="contenedor">
+    <h1>Monitor de Temperatura</h1>
+    <p class="subtitulo">Proyecto de termodinámica &mdash; datos en vivo</p>
 
-  <div id="alerta-incendio" class="alerta oculta">
-     ¡ALERTA DE INCENDIO! TEMPERATURA CRÍTICA DETECTADA
-  </div>
+    <section class="tarjeta principal">
+      <p class="temp-valor"><span id="temp">--</span>&deg;C</p>
+      <p class="estado" id="estado">Conectando con el sensor...</p>
+    </section>
 
-  <main class="contenedor-principal">
-    
-    <section class="grid-tarjetas">
-      <div class="tarjeta destaque">
-        <h3>Actual</h3>
-        <p id="temp-actual" class="valor">-- °C</p>
+    <section class="detalle">
+      <div class="tarjeta pequena">
+        <h3>Sensor 1</h3>
+        <p id="s1">--&deg;C</p>
       </div>
-      <div class="tarjeta">
-        <h3>Mínima Hoy</h3>
-        <p id="temp-min" class="valor-secundario">-- °C</p>
+      <div class="tarjeta pequena">
+        <h3>Sensor 2</h3>
+        <p id="s2">--&deg;C</p>
       </div>
-      <div class="tarjeta">
-        <h3>Máxima Hoy</h3>
-        <p id="temp-max" class="valor-secundario">-- °C</p>
+      <div class="tarjeta pequena">
+        <h3>Sensor 3</h3>
+        <p id="s3">--&deg;C</p>
       </div>
     </section>
 
-    <section class="tarjeta ia-card">
-      <h3>Predicción del Clima (IA)</h3>
-      <p id="prediccion">Analizando lecturas del sensor...</p>
+    <section class="tarjeta qr">
+      <h3>Comparte este sitio</h3>
+      <img id="qr" alt="Código QR de este sitio">
     </section>
-
-    <section class="tarjeta grafico-card">
-      <h3>Histórico de Temperatura</h3>
-      <div class="wrapper-grafico">
-        <canvas id="graficoTemperatura"></canvas>
-      </div>
-    </section>
-
   </main>
 
+  <!-- SDK de Firebase (sigue siendo JavaScript, solo se importa desde un CDN) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

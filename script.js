@@ -40,5 +40,5 @@ db.ref("temperatura").on("value", (snapshot) => {
 // Usa un servicio gratuito que genera la imagen del QR a partir de una URL,
 // sin necesitar ninguna librería ni lenguaje adicional.
 const urlActual = window.location.href;
-document.getElementById("qr").src =
-  "https://mclovin2025.github.io/Termosense-IA/" + encodeURIComponent(urlActual);
+document.getElementById("qr").
+src ="https://mclovin2025.github.io/Termosense-IA/" + encodeURIComponent(urlActual);

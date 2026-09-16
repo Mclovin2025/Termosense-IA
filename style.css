@@ -2,18 +2,82 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
   font-family: 'Segoe UI', Arial, sans-serif;
   color: #fff;
+  position: relative;
+  overflow-x: hidden;
+
+  /* Fondo tipo galaxia: un par de resplandores de color moviendose
+     lentamente, sobre un degradado oscuro de fondo */
+  background:
+    radial-gradient(circle at 20% 30%, rgba(130, 90, 255, 0.28), transparent 42%),
+    radial-gradient(circle at 80% 75%, rgba(0, 210, 255, 0.18), transparent 45%),
+    radial-gradient(ellipse at bottom, #12102a 0%, #05050d 100%);
+  background-size: 200% 200%, 200% 200%, 100% 100%;
+  animation: nebulaMove 25s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaMove {
+  0%   { background-position: 0% 0%,   100% 100%, 0 0; }
+  100% { background-position: 100% 40%, 0% 20%,   0 0; }
+}
+
+/* Dos capas de estrellas, cada una a distinta velocidad, para dar
+   sensacion de profundidad y movimiento constante */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  background-image:
+    radial-gradient(1.6px 1.6px at 20px 30px, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 60px 90px, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 110px 40px, #cdd6ff, transparent),
+    radial-gradient(1.2px 1.2px at 150px 130px, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 190px 20px, #fff, transparent),
+    radial-gradient(1px 1px at 35px 160px, #cdd6ff, transparent);
+  background-size: 220px 220px;
+  animation: drift 100s linear infinite;
+  opacity: 0.9;
+}
+
+body::after {
+  background-image:
+    radial-gradient(1px 1px at 50px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 95px 15px, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 140px 100px, #cdd6ff, transparent),
+    radial-gradient(1px 1px at 180px 150px, #fff, transparent);
+  background-size: 320px 320px;
+  animation: drift 160s linear infinite reverse;
+  opacity: 0.55;
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-220px, -220px); }
 }
 
 .contenedor {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 480px;
   padding: 24px;
@@ -23,6 +87,7 @@ body {
 h1 {
   margin-bottom: 4px;
   font-size: 1.8rem;
+  letter-spacing: 0.5px;
 }
 
 .subtitulo {
@@ -32,11 +97,22 @@ h1 {
 }
 
 .tarjeta {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 20px;
   margin: 16px 0;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+/* Efecto al pasar el cursor (mouse) o el dedo (:active, en tactil) */
+.tarjeta:hover,
+.tarjeta:active {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(130, 90, 255, 0.35);
+  border-color: rgba(130, 90, 255, 0.55);
+  background: rgba(255, 255, 255, 0.09);
 }
 
 .principal .temp-valor {
@@ -74,10 +150,15 @@ h1 {
   font-weight: bold;
 }
 
-.qr div {
+/* Seccion del QR: centrado */
+.qr {
+  text-align: center;
+}
+
+.qr #qr {
   display: inline-block;
   background: #fff;
-  padding: 8px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   line-height: 0;
 }

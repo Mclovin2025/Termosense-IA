@@ -40,5 +40,18 @@ db.ref("temperatura").on("value", (snapshot) => {
 // Usa un servicio gratuito que genera la imagen del QR a partir de una URL,
 // sin necesitar ninguna librería ni lenguaje adicional.
 const urlActual = window.location.href;
-document.getElementById("qr").
-src ="https://mclovin2025.github.io/Termosense-IA/" + encodeURIComponent(urlActual);
+const qrImg = document.getElementById("qr");
+const qrUrl = "https://mclovin2025.github.io/Termosense-IA/" + encodeURIComponent(urlActual);
+
+qrImg.src = qrUrl;
+
+// Si la imagen del QR no logra cargar (por ejemplo, si esa red bloquea el
+// servicio), mostramos el enlace como texto en su lugar, para que se note
+// el problema en vez de quedar en blanco sin explicación.
+qrImg.onerror = () => {
+  const aviso = document.createElement("p");
+  aviso.style.fontSize = "0.8rem";
+  aviso.style.color = "#ffcccb";
+  aviso.textContent = "No se pudo cargar la imagen del QR. Comparte este enlace: " + urlActual;
+  qrImg.replaceWith(aviso);
+};

@@ -3,9 +3,9 @@
 // Firebase Console > Configuración del proyecto > Tus apps > Agregar app web
 // Son públicos por diseño (no son contraseñas), no hay problema en subirlos al repositorio.
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  databaseURL: "https://TU_PROYECTO-default-rtdb.firebaseio.com",
-  projectId: "TU_PROYECTO"
+  apiKey: "AIzaSyDXdpqX1U4IeBTB6LEqUqhh08R0SlY2cgw",
+  databaseURL: "https://termosense-ia-898d8-default-rtdb.firebaseio.com",
+  projectId: "termosense-ia-898d8"
 };
 
 firebase.initializeApp(firebaseConfig);

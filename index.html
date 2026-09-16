@@ -34,12 +34,15 @@
 
     <section class="tarjeta qr">
       <h3>Comparte este sitio</h3>
-      <img id="qr" alt="Código QR de este sitio">
+      <div id="qr"></div>
     </section>
   </main>
 
   <!-- SDK de Firebase (sigue siendo JavaScript, solo se importa desde un CDN) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-  <script src="script.js?v=2"></script>
+  <!-- Librería para generar el QR directamente en el navegador (sin pedirle la imagen a otro servidor) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js?v=3"></script>
+</body>
 </html>

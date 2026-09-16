@@ -3,9 +3,9 @@
 // Firebase Console > Configuración del proyecto > Tus apps > Agregar app web
 // Son públicos por diseño (no son contraseñas), no hay problema en subirlos al repositorio.
 const firebaseConfig = {
-  apiKey: "AIzaSyDXdpqX1U4IeBTB6LEqUqhh08R0SlY2cgw",
-  databaseURL: "https://termosense-ia-898d8-default-rtdb.firebaseio.com",
-  projectId: "termosense-ia-898d8"
+  apiKey: "TU_API_KEY",
+  databaseURL: "https://TU_PROYECTO-default-rtdb.firebaseio.com",
+  projectId: "TU_PROYECTO"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -37,21 +37,13 @@ db.ref("temperatura").on("value", (snapshot) => {
 });
 
 // ==================== GENERAR EL QR DEL SITIO ====================
-// Usa un servicio gratuito que genera la imagen del QR a partir de una URL,
-// sin necesitar ninguna librería ni lenguaje adicional.
+// Se genera directamente en el navegador con la librería QRCode.js
+// (cargada como <script> en index.html), sin pedirle una imagen a
+// ningún servidor externo — así evitamos que redes que bloqueen
+// ciertos servicios de QR afecten esto.
 const urlActual = window.location.href;
-const qrImg = document.getElementById("qr");
-const qrUrl = "https://mclovin2025.github.io/Termosense-IA/" + encodeURIComponent(urlActual);
-
-qrImg.src = qrUrl;
-
-// Si la imagen del QR no logra cargar (por ejemplo, si esa red bloquea el
-// servicio), mostramos el enlace como texto en su lugar, para que se note
-// el problema en vez de quedar en blanco sin explicación.
-qrImg.onerror = () => {
-  const aviso = document.createElement("p");
-  aviso.style.fontSize = "0.8rem";
-  aviso.style.color = "#ffcccb";
-  aviso.textContent = "No se pudo cargar la imagen del QR. Comparte este enlace: " + urlActual;
-  qrImg.replaceWith(aviso);
-};
+new QRCode(document.getElementById("qr"), {
+  text: urlActual,
+  width: 200,
+  height: 200
+});
